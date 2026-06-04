@@ -10,9 +10,17 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("Constr");
+if (!string.IsNullOrEmpty(connectionString) && connectionString.StartsWith("postgres://"))
+{
+    var databaseUri = new Uri(connectionString);
+    var userInfo = databaseUri.UserInfo.Split(':');
+    connectionString = $"Host={databaseUri.Host};Port={databaseUri.Port};Database={databaseUri.LocalPath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};SslMode=Require;TrustServerCertificate=True;";
+}
+
 builder.Services.AddDbContext<HospitalManagementDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Constr"));
+    options.UseNpgsql(connectionString);
 });
 
 builder.Services.AddSignalR();
