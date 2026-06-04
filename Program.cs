@@ -11,7 +11,9 @@ using Microsoft.IdentityModel.Tokens;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("Constr");
-if (!string.IsNullOrEmpty(connectionString) && connectionString.StartsWith("postgres://"))
+
+// Sửa lại dòng if này để hỗ trợ cả postgres:// và postgresql://
+if (!string.IsNullOrEmpty(connectionString) && (connectionString.StartsWith("postgres://") || connectionString.StartsWith("postgresql://")))
 {
     var databaseUri = new Uri(connectionString);
     var userInfo = databaseUri.UserInfo.Split(':');
@@ -22,6 +24,7 @@ builder.Services.AddDbContext<HospitalManagementDbContext>(options =>
 {
     options.UseNpgsql(connectionString);
 });
+
 
 builder.Services.AddSignalR();
 
