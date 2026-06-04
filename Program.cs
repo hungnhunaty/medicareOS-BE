@@ -128,7 +128,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-app.UseCors();
+app.UseCors("CorsPolicy");
 app.UseWebSockets();
 
 app.UseAuthentication();
