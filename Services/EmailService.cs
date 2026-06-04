@@ -49,6 +49,7 @@ namespace BE.Services
                     smtpClient.Port = port;
                     smtpClient.Credentials = new NetworkCredential(senderEmail, senderPassword);
                     smtpClient.EnableSsl = true;
+                    smtpClient.Timeout = 3000; // Giới hạn thời gian kết nối tối đa 3 giây
 
                     using (var mailMessage = new MailMessage())
                     {
@@ -58,7 +59,7 @@ namespace BE.Services
                         mailMessage.IsBodyHtml = true;
                         mailMessage.To.Add(toEmail);
 
-                        await smtpClient.SendMailAsync(mailMessage);
+                        smtpClient.Send(mailMessage);
                     }
                 }
                 Console.WriteLine($"[EmailService] Đã gửi email thành công tới {toEmail}");

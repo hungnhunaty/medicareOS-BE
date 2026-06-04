@@ -26,6 +26,7 @@ public class PatientPortalService
             .Include(p => p.MedicalExaminations)
                 .ThenInclude(m => m.Prescriptions).ThenInclude(pr => pr.PrescriptionDetails).ThenInclude(pd => pd.Medication)
             .Include(p => p.Invoices)
+                .ThenInclude(i => i.InvoiceDetails)
             .AsQueryable();
 
         Patient? patient = null;
@@ -71,7 +72,14 @@ public class PatientPortalService
                 invoiceCode = "HD-" + i.InvoiceId.ToString().PadLeft(4, '0'),
                 date = i.InvoiceDate.HasValue ? i.InvoiceDate.Value.ToString("dd/MM/yyyy") : "N/A",
                 totalAmount = i.TotalAmount,
-                status = i.Status == 1 ? "Đã thanh toán" : "Chờ thanh toán"
+                status = i.Status == 1 ? "Đã thanh toán" : "Chờ thanh toán",
+                items = i.InvoiceDetails.Select(d => new 
+                {
+                    name = d.ItemName,
+                    quantity = d.Quantity,
+                    unitPrice = d.UnitPrice,
+                    totalAmount = d.TotalAmount
+                }).ToList()
             }).ToList();
 
         return new
