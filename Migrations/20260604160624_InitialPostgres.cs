@@ -84,7 +84,7 @@ namespace BE.Migrations
                     Gender = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
                     DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: true, defaultValue: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true, defaultValueSql: "(getdate())"),
                     IsEmailVerified = table.Column<bool>(type: "boolean", nullable: true),
                     VerificationToken = table.Column<string>(type: "text", nullable: true),
                     PasswordResetToken = table.Column<string>(type: "text", nullable: true),
@@ -214,7 +214,7 @@ namespace BE.Migrations
                     Bonuses = table.Column<decimal>(type: "numeric(18,2)", nullable: true, defaultValue: 0m),
                     Deductions = table.Column<decimal>(type: "numeric(18,2)", nullable: true, defaultValue: 0m),
                     NetPay = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
-                    PaymentDate = table.Column<DateTime>(type: "datetime", nullable: true),
+                    PaymentDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     Status = table.Column<int>(type: "integer", nullable: true, defaultValue: 0)
                 },
                 constraints: table =>
@@ -235,7 +235,7 @@ namespace BE.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PatientId = table.Column<int>(type: "integer", nullable: false),
                     DoctorId = table.Column<int>(type: "integer", nullable: false),
-                    VisitDate = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    VisitDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true, defaultValueSql: "(getdate())"),
                     Symptoms = table.Column<string>(type: "text", nullable: true),
                     Diagnosis = table.Column<string>(type: "text", nullable: true),
                     TreatmentPlan = table.Column<string>(type: "text", nullable: true),
@@ -278,7 +278,7 @@ namespace BE.Migrations
                     MedicalExaminationId = table.Column<int>(type: "integer", nullable: false),
                     PatientId = table.Column<int>(type: "integer", nullable: false),
                     CashierId = table.Column<int>(type: "integer", nullable: false),
-                    InvoiceDate = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    InvoiceDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true, defaultValueSql: "(getdate())"),
                     TotalAmount = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
                     PaymentMethod = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     Status = table.Column<int>(type: "integer", nullable: true, defaultValue: 0)
@@ -310,7 +310,7 @@ namespace BE.Migrations
                     PrescriptionsId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     MedicalExaminationId = table.Column<int>(type: "integer", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: true, defaultValueSql: "(getdate())"),
                     Status = table.Column<int>(type: "integer", nullable: true, defaultValue: 0)
                 },
                 constraints: table =>
@@ -335,7 +335,7 @@ namespace BE.Migrations
                     QueueNumber = table.Column<int>(type: "integer", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     Priority = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())")
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "(getdate())")
                 },
                 constraints: table =>
                 {

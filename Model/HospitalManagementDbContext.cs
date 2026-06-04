@@ -103,7 +103,7 @@ public partial class HospitalManagementDbContext : DbContext
 
             entity.Property(e => e.InvoiceDate)
                 .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+                .HasColumnType("timestamp without time zone");
             entity.Property(e => e.PaymentMethod).HasMaxLength(50);
             entity.Property(e => e.Status).HasDefaultValue(0);
             entity.Property(e => e.TotalAmount).HasColumnType("decimal(18, 2)");
@@ -150,7 +150,7 @@ public partial class HospitalManagementDbContext : DbContext
             entity.Property(e => e.Temperature).HasColumnType("decimal(5, 2)");
             entity.Property(e => e.VisitDate)
                 .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+                .HasColumnType("timestamp without time zone");
             entity.Property(e => e.Weight).HasColumnType("decimal(5, 2)");
 
             entity.HasOne(d => d.Doctor).WithMany(p => p.MedicalExaminations)
@@ -218,7 +218,7 @@ public partial class HospitalManagementDbContext : DbContext
             entity.Property(e => e.PayPeriod)
                 .HasMaxLength(20)
                 .IsUnicode(false);
-            entity.Property(e => e.PaymentDate).HasColumnType("datetime");
+            entity.Property(e => e.PaymentDate).HasColumnType("timestamp without time zone");
             entity.Property(e => e.Status).HasDefaultValue(0);
 
             entity.HasOne(d => d.Staff).WithMany(p => p.Payrolls)
@@ -233,7 +233,7 @@ public partial class HospitalManagementDbContext : DbContext
 
             entity.Property(e => e.Date)
                 .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+                .HasColumnType("timestamp without time zone");
             entity.Property(e => e.Status).HasDefaultValue(0);
 
             entity.HasOne(d => d.MedicalExamination).WithMany(p => p.Prescriptions)
@@ -268,7 +268,7 @@ public partial class HospitalManagementDbContext : DbContext
 
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+                .HasColumnType("timestamp without time zone");
 
             entity.HasOne(d => d.Clinic).WithMany()
                 .HasForeignKey(d => d.ClinicId)
@@ -348,7 +348,7 @@ public partial class HospitalManagementDbContext : DbContext
             entity.Property(e => e.Address).HasMaxLength(255);
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+                .HasColumnType("timestamp without time zone");
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .IsUnicode(false);

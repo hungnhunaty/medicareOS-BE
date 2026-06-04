@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BE.Migrations
 {
     [DbContext(typeof(HospitalManagementDbContext))]
-    [Migration("20260604155922_InitialPostgres")]
+    [Migration("20260604160624_InitialPostgres")]
     partial class InitialPostgres
     {
         /// <inheritdoc />
@@ -109,7 +109,7 @@ namespace BE.Migrations
 
                     b.Property<DateTime?>("InvoiceDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
+                        .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("(getdate())");
 
                     b.Property<int>("MedicalExaminationId")
@@ -234,7 +234,7 @@ namespace BE.Migrations
 
                     b.Property<DateTime?>("VisitDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
+                        .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("(getdate())");
 
                     b.Property<decimal?>("Weight")
@@ -353,7 +353,7 @@ namespace BE.Migrations
                         .HasColumnType("character varying(20)");
 
                     b.Property<DateTime?>("PaymentDate")
-                        .HasColumnType("datetime");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("StaffId")
                         .HasColumnType("integer");
@@ -381,7 +381,7 @@ namespace BE.Migrations
 
                     b.Property<DateTime?>("Date")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
+                        .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("(getdate())");
 
                     b.Property<int>("MedicalExaminationId")
@@ -439,7 +439,7 @@ namespace BE.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
+                        .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("(getdate())");
 
                     b.Property<int?>("MedicalExaminationId")
@@ -576,7 +576,7 @@ namespace BE.Migrations
 
                     b.Property<DateTime?>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
+                        .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("(getdate())");
 
                     b.Property<DateOnly?>("DateOfBirth")
