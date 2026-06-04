@@ -107,7 +107,7 @@ namespace BE.Migrations
                     b.Property<DateTime?>("InvoiceDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<int>("MedicalExaminationId")
                         .HasColumnType("integer");
@@ -232,7 +232,7 @@ namespace BE.Migrations
                     b.Property<DateTime?>("VisitDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<decimal?>("Weight")
                         .HasColumnType("decimal(5, 2)");
@@ -379,7 +379,7 @@ namespace BE.Migrations
                     b.Property<DateTime?>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<int>("MedicalExaminationId")
                         .HasColumnType("integer");
@@ -437,7 +437,7 @@ namespace BE.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<int?>("MedicalExaminationId")
                         .HasColumnType("integer");
@@ -574,7 +574,7 @@ namespace BE.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<DateOnly?>("DateOfBirth")
                         .HasColumnType("date");

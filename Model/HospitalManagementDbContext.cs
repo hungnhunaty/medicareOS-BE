@@ -102,7 +102,7 @@ public partial class HospitalManagementDbContext : DbContext
             entity.HasKey(e => e.InvoiceId).HasName("PK__Invoices__D796AAB5B4865AF0");
 
             entity.Property(e => e.InvoiceDate)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp without time zone");
             entity.Property(e => e.PaymentMethod).HasMaxLength(50);
             entity.Property(e => e.Status).HasDefaultValue(0);
@@ -149,7 +149,7 @@ public partial class HospitalManagementDbContext : DbContext
             entity.Property(e => e.Status).HasDefaultValue(0);
             entity.Property(e => e.Temperature).HasColumnType("decimal(5, 2)");
             entity.Property(e => e.VisitDate)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp without time zone");
             entity.Property(e => e.Weight).HasColumnType("decimal(5, 2)");
 
@@ -232,7 +232,7 @@ public partial class HospitalManagementDbContext : DbContext
             entity.HasKey(e => e.PrescriptionsId).HasName("PK__Prescrip__A2F31069879F8761");
 
             entity.Property(e => e.Date)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp without time zone");
             entity.Property(e => e.Status).HasDefaultValue(0);
 
@@ -267,7 +267,7 @@ public partial class HospitalManagementDbContext : DbContext
             entity.ToTable("Queue");
 
             entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp without time zone");
 
             entity.HasOne(d => d.Clinic).WithMany()
@@ -347,7 +347,7 @@ public partial class HospitalManagementDbContext : DbContext
 
             entity.Property(e => e.Address).HasMaxLength(255);
             entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp without time zone");
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
