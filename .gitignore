@@ -1,0 +1,37 @@
+# ==========================================
+# 1. Thư mục Build và Xuất bản (BẮT BUỘC BỎ QUA)
+# ==========================================
+bin/
+obj/
+/app/publish/
+
+# ==========================================
+# 2. File cấu hình môi trường / Bảo mật (Không push Connection String, Mật khẩu)
+# ==========================================
+appsettings.Development.json
+appsettings.Local.json
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ==========================================
+# 3. Thư mục ẩn của Visual Studio và VS Code
+# ==========================================
+.vs/
+.vscode/
+.idea/
+*.swp
+
+# ==========================================
+# 4. File rác hệ điều hành
+# ==========================================
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# ==========================================
+# 5. Thư mục sinh ra bởi công cụ kiểm tra hiệu năng (Profiling)
+# ==========================================
+StressTests/
+$tf/
