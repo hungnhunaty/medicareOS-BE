@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BE.Migrations
 {
     [DbContext(typeof(HospitalManagementDbContext))]
-    [Migration("20260604160858_InitialPostgres")]
+    [Migration("20260604162111_InitialPostgres")]
     partial class InitialPostgres
     {
         /// <inheritdoc />
@@ -618,7 +618,7 @@ namespace BE.Migrations
                         .HasColumnType("character varying(20)");
 
                     b.Property<DateTime?>("ResetTokenExpiry")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(50)

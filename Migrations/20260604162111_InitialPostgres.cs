@@ -88,7 +88,7 @@ namespace BE.Migrations
                     IsEmailVerified = table.Column<bool>(type: "boolean", nullable: true),
                     VerificationToken = table.Column<string>(type: "text", nullable: true),
                     PasswordResetToken = table.Column<string>(type: "text", nullable: true),
-                    ResetTokenExpiry = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    ResetTokenExpiry = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
