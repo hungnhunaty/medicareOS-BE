@@ -148,7 +148,7 @@ public class AccountService{
         user.ResetTokenExpiry = DateTime.UtcNow.AddMinutes(15);
         await _dbContext.SaveChangesAsync();
 
-        var resetLink = $"http://localhost:4200/reset-password?token={resetToken}&email={email}";
+        var resetLink = $"https://medicare-os-fe.vercel.app/reset-password?token={resetToken}&email={email}";
         var emailBody = $@"
             <h3>Medicare - Yêu cầu đặt lại mật khẩu</h3>
             <p>Chúng tôi nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn.</p>
