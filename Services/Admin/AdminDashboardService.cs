@@ -13,11 +13,13 @@ public class AdminDashboardService
 {
     private readonly HospitalManagementDbContext _dbContext;
     private readonly IHubContext<QueueHub> _hubContext;
+    private readonly IHubContext<QueueNotificationHub> _notificationHubContext;
 
-    public AdminDashboardService(HospitalManagementDbContext dbContext, IHubContext<QueueHub> hubContext)
+    public AdminDashboardService(HospitalManagementDbContext dbContext, IHubContext<QueueHub> hubContext, IHubContext<QueueNotificationHub> notificationHubContext)
     {
         _dbContext = dbContext;
         _hubContext = hubContext;
+        _notificationHubContext = notificationHubContext;
     }
 
     public async Task<object> GetDashboardStatsAsync()
@@ -125,6 +127,8 @@ public class AdminDashboardService
 
         await _dbContext.SaveChangesAsync();
         await _hubContext.Clients.All.SendAsync("QueueUpdated");
+        await _notificationHubContext.Clients.All.SendAsync("QueueUpdated");
+
         return true;
     }
 
@@ -185,6 +189,8 @@ public class AdminDashboardService
         _dbContext.MedicalExaminations.Add(exam);
         await _dbContext.SaveChangesAsync();
         await _hubContext.Clients.All.SendAsync("QueueUpdated");
+        await _notificationHubContext.Clients.All.SendAsync("QueueUpdated");
+
 
         return new
         {
