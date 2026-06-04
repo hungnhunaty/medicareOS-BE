@@ -131,8 +131,9 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        Console.WriteLine("Lỗi Migrate hoặc Seeding dữ liệu Admin: " + ex.Message);
+        Console.WriteLine("Lỗi Migrate hoặc Seeding dữ liệu Admin: " + ex.Message + " | Chi tiết (Inner): " + ex.InnerException?.Message);
     }
+
 }
 
 app.UseCors("CorsPolicy");
