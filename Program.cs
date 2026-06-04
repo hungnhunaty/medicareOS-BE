@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<HospitalManagementDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Constr"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Constr"));
 });
 
 builder.Services.AddSignalR();
@@ -25,9 +25,9 @@ builder.Services.AddSignalR();
 //     });
 // });
 ////////
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5265";
 builder.WebHost.UseUrls(
-    "http://0.0.0.0:5265",
-    "https://0.0.0.0:7073"
+    $"http://0.0.0.0:{port}"
 );
 builder.Services.AddCors(opt =>
 {
@@ -109,25 +109,6 @@ using (var scope = app.Services.CreateScope())
     {
         var context = scope.ServiceProvider.GetRequiredService<HospitalManagementDbContext>();
         
-        // Đồng bộ lịch sử migration đầu tiên nếu các bảng đã tồn tại sẵn trong DB để tránh lỗi tạo bảng trùng lặp
-        await context.Database.ExecuteSqlRawAsync(
-            "IF OBJECT_ID(N'[Department]') IS NOT NULL " +
-            "BEGIN " +
-            "    IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL " +
-            "    BEGIN " +
-            "        CREATE TABLE [__EFMigrationsHistory] ( " +
-            "            [MigrationId] nvarchar(150) NOT NULL, " +
-            "            [ProductVersion] nvarchar(32) NOT NULL, " +
-            "            CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId]) " +
-            "        ); " +
-            "    END; " +
-            "    IF NOT EXISTS (SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = '20260514155632_AddClinicAndQueue') " +
-            "    BEGIN " +
-            "        INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion]) " +
-            "        VALUES ('20260514155632_AddClinicAndQueue', '8.0.0'); " +
-            "    END; " +
-            "END;");
-
         await context.Database.MigrateAsync();
 
         var initializer = scope.ServiceProvider.GetRequiredService<DbInitializerAdmin>();
