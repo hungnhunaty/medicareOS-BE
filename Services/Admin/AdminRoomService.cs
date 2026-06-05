@@ -18,9 +18,10 @@ public class AdminRoomService
 
     public async Task<object> GetAllRoomsAsync()
     {
-        // Lấy danh sách doctor đang khám (status = 1: Đang khám) để biết phòng nào đang sử dụng
+        // Lấy danh sách bác sĩ đang làm việc tại phòng (có ca khám chờ hoặc đang khám trong ngày hôm nay)
+        var today = DateTime.UtcNow.Date;
         var activeExams = await _dbContext.MedicalExaminations
-            .Where(e => e.Status == 1 && e.ClinicId != null)
+            .Where(e => (e.Status == 0 || e.Status == 1) && e.ClinicId != null && e.VisitDate >= today)
             .Include(e => e.Doctor)
                 .ThenInclude(d => d.User)
                     .ThenInclude(u => u.User)
@@ -29,11 +30,12 @@ public class AdminRoomService
                     .ThenInclude(s => s.Department)
             .ToListAsync();
 
+        // Group theo ClinicId, ưu tiên ca đang khám (status=1) trước, rồi mới đến chờ (status=0)
         var activeByClinic = activeExams
             .GroupBy(e => e.ClinicId)
             .ToDictionary(
                 g => g.Key!.Value,
-                g => g.First()
+                g => g.OrderBy(e => e.Status == 1 ? 0 : 1).First()
             );
 
         var rooms = await _dbContext.Clinics
