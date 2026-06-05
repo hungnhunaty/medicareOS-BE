@@ -27,6 +27,13 @@ public class AdminRoomController : ControllerBase
         return Ok(data);
     }
 
+    [HttpGet("departments")]
+    public async Task<IActionResult> GetAllDepartments()
+    {
+        var data = await _roomService.GetAllDepartmentsAsync();
+        return Ok(data);
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateRoom([FromBody] AdminRoomCreateDto dto)
     {

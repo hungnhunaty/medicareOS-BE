@@ -83,6 +83,20 @@ public class AdminRoomService
         return result;
     }
 
+    public async Task<object> GetAllDepartmentsAsync()
+    {
+        var departments = await _dbContext.Departments
+            .OrderBy(d => d.DepartmentId)
+            .Select(d => new
+            {
+                departmentId = d.DepartmentId,
+                name = d.Name
+            })
+            .ToListAsync();
+
+        return departments;
+    }
+
     public async Task<object?> CreateRoomAsync(AdminRoomCreateDto dto)
     {
         var dept = await _dbContext.Departments.FindAsync(dto.DepartmentId);
