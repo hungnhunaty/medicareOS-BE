@@ -108,6 +108,7 @@ builder.Services.AddScoped<AdminPatientService>();
 builder.Services.AddScoped<AdminMedicalServiceService>();
 builder.Services.AddScoped<AdminMedicationService>();
 builder.Services.AddScoped<AdminFinanceService>();
+builder.Services.AddScoped<AdminRoomService>();
 builder.Services.AddScoped<DoctorPortalService>();
 builder.Services.AddScoped<StaffPortalService>();
 builder.Services.AddScoped<PatientPortalService>();
